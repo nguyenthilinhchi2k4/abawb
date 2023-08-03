@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-combined.min.css">
+    <script src="jsonload.js"></script>
+    <script>document.write('<base href="' + document.location + '"/>');</script>
+</head>
+<body>
+    <div class="container">
+        <div ng-controller="jsonCtrl"> 
+            <h1>CodeLean.vn Demo Read JSON file</h1><!--VIEW-->
+            <h3>Add, Search, Filter</h3><!--VIEW-->
+            <h5>Total Employees {{getTotalEmployees()}}</h5><!--MODEL-->
+            <div class="mb-3"> <!--MODEL-->
+                <label for="empName" class="form-label">Employee Name</label><!--VIEW-->
+                <input type="text" class="form-control" id="empName" ng-model="empName" placeholder="Enter employee Name"><!--MODEL-->
+            </div>
+            <div class="mb-3"><!--MODEL-->
+                <label for="empCity" class="form-label">City</label><!--VIEW-->
+                <input type="text" class="form-control" id="empCity" ng-model="empCity" placeholder="Enter employee City"><!--MODEL-->
+            </div>
+            <div class="mb-3"><!--MODEL-->
+                <label for="empState" class="form-label">State</label><!--VIEW-->
+                <input type="text" class="form-control" id="empState" ng-model="empState" placeholder="Enter employee State"><!--MODEL-->
+            </div>
+            <button class="btn" ng-click="addEmp()">Add <i class="icon-plus"></i></button> <!--CONTROLLER-->
+            <br><br>
+            <label>Search</label><input type="text" ng-model="search.name"> <!--CONTROLLER-->
+
+            <table class="table table-striped"><!--VIEW-->
+                <thead>
+                    <th>Name</th><!--VIEW-->
+                    <th>City</th><!--VIEW-->
+                    <th>State</th><!--VIEW-->
+                </thead>
+                <tr ng-repeat="resource in employees | filter:search"><!--VIEW-->
+                    <td>{{resource.name}}</td><!--MODEL-->
+                    <td>{{resource.city}}</td><!--MODEL-->
+                    <td>{{resource.state}}</td><!--MODEL-->
+                </tr>
+            </table>
+        </div>
+        <div ng-controller="testCtrl">
+            <input type="text" ng-model="myName" placeholder="Enter employee Name to Add" class="form-control"><!--MODEL-->
+            <button ng-click="addName()" class="btn">Add</button><!--CONTROLLER-->
+            <br><br>
+            Enter employee name to search:<!--VIEW-->
+            <input type="text" ng-model="search" class="form-control"><!--CONTROLLER-->
+            <ul>
+                <li ng-repeat="name in names | filter:search" placeholder="Enter employee name to Search">{{ name.name }}</li><!--MODEL-->
+            </ul>
+        </div>
+    </div>
+    
+</body>
+</html>
